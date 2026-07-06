@@ -6,6 +6,7 @@ from datetime import date, timedelta
 from typing import Literal
 
 from fastapi import APIRouter, Query
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
 
 OperationType = Literal["income", "outcome"]
@@ -238,6 +239,11 @@ def detect_outcome_alerts(
                     )
         historical_outcomes.append(item.outcome)
     return alerts
+
+
+@router.get("/", include_in_schema=False)
+def root() -> RedirectResponse:
+    return RedirectResponse(url="/docs")
 
 
 @router.get("/health")

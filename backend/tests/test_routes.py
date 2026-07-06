@@ -26,6 +26,13 @@ def test_filter_movements_by_date_includes_range_edges():
     assert all(movement.create_date == target_date for movement in filtered)
 
 
+def test_root_redirects_to_docs():
+    response = client.get("/", follow_redirects=False)
+
+    assert response.status_code == 307
+    assert response.headers["location"] == "/docs"
+
+
 def test_health_endpoint_returns_ok():
     response = client.get("/health")
 
