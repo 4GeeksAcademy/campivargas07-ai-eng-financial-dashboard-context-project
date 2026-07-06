@@ -11,7 +11,7 @@ _These instructions are [available in English](./README.md)._
 
 **Antes de empezar**: 📗 [Lee las instrucciones](https://4geeks.com/es/lesson/como-comenzar-un-proyecto-de-codificacion) sobre cómo comenzar un proyecto de programación.
 
-<!-- endhide -->
+<!-- endhide -->  
 
 ---
 
