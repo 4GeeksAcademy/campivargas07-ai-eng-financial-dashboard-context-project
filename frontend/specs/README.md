@@ -18,6 +18,8 @@ This folder defines frontend specifications for three features without implement
 - `param-types.ts`: query parameter types sent from frontend.
 - `components.md`: component-level functional breakdown.
 - `implementation-checklist.md`: execution checklist to implement the specs safely and in order.
+- `implementation-tasks.md`: parallel backlog with task IDs, dependencies, and done criteria.
+- `github-issues.md`: copy-paste issue templates ready to create in GitHub.
 
 ---
 
