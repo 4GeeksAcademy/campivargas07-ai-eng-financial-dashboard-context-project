@@ -20,6 +20,7 @@ This folder defines frontend specifications for three features without implement
 - `implementation-checklist.md`: execution checklist to implement the specs safely and in order.
 - `implementation-tasks.md`: parallel backlog with task IDs, dependencies, and done criteria.
 - `github-issues.md`: copy-paste issue templates ready to create in GitHub.
+- `github-projects-automation.md`: commands to add TASK issues to a GitHub Project board.
 
 ---
 
