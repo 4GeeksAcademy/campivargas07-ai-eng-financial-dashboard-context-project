@@ -78,7 +78,7 @@ export interface AlertEntry {
  * Response body of GET /api/metrics/alerts.
  * The API returns a raw JSON array.
  */
-export interface AlertsResponse extends ReadonlyArray<AlertEntry> {}
+export type AlertsResponse = ReadonlyArray<AlertEntry>
 
 /**
  * One ranked category from GET /api/metrics/categories/top.
@@ -106,4 +106,4 @@ export interface CategoryEntry {
  * Response body of GET /api/metrics/categories/top.
  * The API returns a raw JSON array.
  */
-export interface TopCategoriesResponse extends ReadonlyArray<CategoryEntry> {}
+export type TopCategoriesResponse = ReadonlyArray<CategoryEntry>

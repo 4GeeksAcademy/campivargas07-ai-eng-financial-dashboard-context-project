@@ -62,6 +62,13 @@ export function IncomeOutcomeChart({ data, loading }: IncomeOutcomeChartProps) {
   }
 
   const hasData = data.some((d) => d.income > 0 || d.outcome > 0)
+  const firstMonth = data[0]?.month
+  const lastMonth = data[data.length - 1]?.month
+  const maxIncome = data.reduce((max, point) => Math.max(max, point.income), 0)
+  const maxOutcome = data.reduce((max, point) => Math.max(max, point.outcome), 0)
+  const description = hasData
+    ? `Line chart for monthly income and outcome from ${firstMonth} to ${lastMonth}. Peak income is ${formatCurrency(maxIncome)} and peak outcome is ${formatCurrency(maxOutcome)}.`
+    : 'Line chart for monthly income and outcome with no available data points.'
 
   return (
     <Card className="border-border/60">
@@ -70,6 +77,9 @@ export function IncomeOutcomeChart({ data, loading }: IncomeOutcomeChartProps) {
         <CardDescription>Monthly revenue and expenditure evolution</CardDescription>
       </CardHeader>
       <CardContent>
+        <p id="income-outcome-chart-desc" className="sr-only">
+          {description}
+        </p>
         {!hasData ? (
           <div className="flex h-[280px] items-center justify-center text-muted-foreground text-sm">
             No data available to display
@@ -77,6 +87,8 @@ export function IncomeOutcomeChart({ data, loading }: IncomeOutcomeChartProps) {
         ) : (
           <ResponsiveContainer width="100%" height={280}>
             <LineChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
+              <title>Income and outcome monthly trends</title>
+              <desc>{description}</desc>
               <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" strokeOpacity={0.6} />
               <XAxis
                 dataKey="month"
@@ -103,6 +115,7 @@ export function IncomeOutcomeChart({ data, loading }: IncomeOutcomeChartProps) {
                 name="income"
                 stroke="var(--chart-income)"
                 strokeWidth={2}
+                strokeDasharray="6 0"
                 dot={{ r: 3, fill: 'var(--chart-income)', strokeWidth: 0 }}
                 activeDot={{ r: 5, strokeWidth: 0 }}
               />
@@ -112,6 +125,7 @@ export function IncomeOutcomeChart({ data, loading }: IncomeOutcomeChartProps) {
                 name="outcome"
                 stroke="var(--chart-outcome)"
                 strokeWidth={2}
+                strokeDasharray="4 2"
                 dot={{ r: 3, fill: 'var(--chart-outcome)', strokeWidth: 0 }}
                 activeDot={{ r: 5, strokeWidth: 0 }}
               />

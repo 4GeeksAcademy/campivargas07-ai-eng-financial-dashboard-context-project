@@ -62,7 +62,14 @@ export function ProfitPercentChart({ data, loading }: ProfitPercentChartProps) {
     )
   }
 
-  const hasData = data.some((d) => d.profitPercent !== 0)
+  const hasData = data.length > 0
+  const firstMonth = data[0]?.month
+  const lastMonth = data[data.length - 1]?.month
+  const maxProfitPercent = data.reduce((max, point) => Math.max(max, point.profitPercent), 0)
+  const minProfitPercent = data.reduce((min, point) => Math.min(min, point.profitPercent), 0)
+  const description = hasData
+    ? `Line chart for monthly profit margin from ${firstMonth} to ${lastMonth}. Peak margin is ${maxProfitPercent.toFixed(1)} percent and lowest margin is ${minProfitPercent.toFixed(1)} percent.`
+    : 'Line chart for monthly profit margin with no available data points.'
 
   return (
     <Card className="border-border/60">
@@ -71,6 +78,9 @@ export function ProfitPercentChart({ data, loading }: ProfitPercentChartProps) {
         <CardDescription>Monthly profit as a percentage of total income</CardDescription>
       </CardHeader>
       <CardContent>
+        <p id="profit-percent-chart-desc" className="sr-only">
+          {description}
+        </p>
         {!hasData ? (
           <div className="flex h-[280px] items-center justify-center text-muted-foreground text-sm">
             No data available to display
@@ -78,6 +88,8 @@ export function ProfitPercentChart({ data, loading }: ProfitPercentChartProps) {
         ) : (
           <ResponsiveContainer width="100%" height={280}>
             <LineChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
+              <title>Profit margin monthly trend</title>
+              <desc>{description}</desc>
               <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" strokeOpacity={0.6} />
               <XAxis
                 dataKey="month"
