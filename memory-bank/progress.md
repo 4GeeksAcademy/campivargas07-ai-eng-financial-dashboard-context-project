@@ -117,6 +117,14 @@ Commands executed in `frontend/`:
 3. `npm test`
 - Final status: PASS (all existing tests green)
 
+4. `npm run build` after Vite checks adjustment
+- Final status: PASS
+- Additional result: previous `[PLUGIN_TIMINGS]` warning no longer shown after setting `build.rolldownOptions.checks.pluginTimings=false`.
+
+5. Lighthouse execution attempt in container
+- Status: BLOCKED by runtime environment (no system Chrome and missing native libs for headless shell such as `libatk-1.0.so.0`).
+- Mitigation: documented the limitation and kept reproducible command with explicit browser path for environments that include required libraries.
+
 ## Next steps
 
 1. Manual keyboard and screen-reader QA pass
@@ -130,3 +138,6 @@ Commands executed in `frontend/`:
 
 4. Optional SEO expansion
 - Add canonical URL and environment-based `og:url` if deployment URL is available.
+
+5. Infrastructure follow-up for automated browser audits
+- Install required Linux libs for headless Chromium in CI/devcontainer and run Lighthouse in pipeline for objective category scoring.
